@@ -1,16 +1,28 @@
-name: Example GitHub Action
+name: Daily Commit
 
 on:
-  push:
-    branches:
-      - main
+  schedule:
+    - cron: "30 5 * * *"  # Runs every day at 05:30 UTC
+  workflow_dispatch:  # Allows manual triggering
 
 jobs:
-  test:
+  commit-job:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
 
-      - name: 24f1002771@ds.study.iitm.ac.in
-        run: echo "Hello, world!"
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Make a change
+        run: echo "Last run on $(date)" > last_run.txt
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "GitHub Actions Bot"
+          git config --global user.email "24f1002771@ds.study.iitm.ac.in"
+
+      - name: Commit and Push Changes
+        run: |
+          git add last_run.txt
+          git commit -m "Daily update: $(date)"
+          git push
