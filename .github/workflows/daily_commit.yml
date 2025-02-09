@@ -13,7 +13,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Update repository - Email: 24f1002771@ds.study.iitm.ac.in
+      - name: 24f1002771@ds.study.iitm.ac.in
         run: |
           echo "Daily commit on $(date)" >> daily_log.txt
           git config --global user.name "GitHub Actions"
@@ -21,7 +21,7 @@ jobs:
           git add daily_log.txt
           git commit -m "Automated daily commit - $(date)"
 
-      - name: Pull latest changes and push - Email: 24f1002771@ds.study.iitm.ac.in
+      - name: 24f1002771@ds.study.iitm.ac.in
         run: |
           git pull --rebase https://x-access-token:${{ secrets.GH_PAT }}@github.com/SuprajaIITM/TDS-GA2.git main
           git push https://x-access-token:${{ secrets.GH_PAT }}@github.com/SuprajaIITM/TDS-GA2.git
